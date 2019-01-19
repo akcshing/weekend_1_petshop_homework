@@ -25,3 +25,17 @@ def stock_count(pet_shop)
   pet_count = pet_shop[:pets].count
   return pet_count
 end
+
+def pets_by_breed(pet_shop, breed)  # error caused by variable typo - fixed
+  pets_of_breed = []
+  for pet in pet_shop[:pets]
+    pets_of_breed << pet if pet[:breed] == breed
+  end
+  return pets_of_breed
+end
+
+def find_pet_by_name(pet_shop, pet_name)  # error caused by returning pet name instead of pet - fixed
+  for pet in pet_shop[:pets]
+    return pet if pet[:name] == pet_name
+  end
+end
