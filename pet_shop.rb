@@ -38,4 +38,23 @@ def find_pet_by_name(pet_shop, pet_name)  # error caused by returning pet name i
   for pet in pet_shop[:pets]
     return pet if pet[:name] == pet_name
   end
+  return nil
+end
+
+def remove_pet_by_name(pet_shop, pet_name)
+  for pet in pet_shop[:pets ]
+    pet_shop[:pets].delete(pet) if pet[:name] == pet_name   # for item in array, if name matches, delete item
+  end
+end
+
+def add_pet_to_stock(pet_shop, new_pet)
+  pet_shop[:pets] << new_pet
+end
+
+def customer_cash(customer)
+  return customer[:cash]
+end
+
+def remove_customer_cash(customer, amount)
+  customer[:cash] -= amount
 end
