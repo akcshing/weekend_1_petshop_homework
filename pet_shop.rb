@@ -17,8 +17,8 @@ def pets_sold(pets_sold)
   return pets_sold
 end
 
-def increase_pets_sold(pets_sold_total, pets_sold)
-  pets_sold_total[:admin][:pets_sold] += pets_sold
+def increase_pets_sold(pet_shop, pets_sold)
+  pet_shop[:admin][:pets_sold] += pets_sold
 end
 
 def stock_count(pet_shop)
@@ -57,4 +57,27 @@ end
 
 def remove_customer_cash(customer, amount)
   customer[:cash] -= amount
+end
+
+def customer_pet_count(customer)
+  pet_count = customer[:pets].count
+  return pet_count
+end
+
+def add_pet_to_customer(customer, new_pet)
+  customer[:pets] << new_pet
+end
+
+def customer_can_afford_pet(customer, new_pet)
+  customer[:cash] >= new_pet[:price] ? true : false
+end
+
+def sell_pet_to_customer(pet_shop, pet, customer)  # pet is == result of find_pet_by_name function, which is pet hash or nil.
+
+  if pet != nil && customer_can_afford_pet(customer, pet) == true # unnecessary to include find pet function as it is already invoked within the test.
+    add_pet_to_customer(customer, pet)
+    increase_pets_sold(pet_shop, 1) # if only selling one pet at a time
+    remove_customer_cash(customer, pet[:price])
+    add_or_remove_cash(pet_shop, pet[:price])
+  end
 end
